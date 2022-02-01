@@ -40,11 +40,11 @@ app.use('/api/feeds', FeedsRouter);
 app.use('/api/likes', LikesRouter);
 
 app.get('/', (req, res) => {
-    res.send('The Crayon Diary Server Works!');
+    res.send('ScratchNow Server Works!');
 })
 
 app.listen(port, () => {
-  console.log(`CrayonDiary Server Running | http://localhost:${port}`);
+  console.log(`ScratchNow Server Running | http://localhost:${port}`);
 });
 
 module.exports = app;

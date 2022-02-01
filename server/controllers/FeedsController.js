@@ -34,18 +34,18 @@ module.exports = {
 
     getUserFeeds: (req, res) => {
         try {
-            db.user.findAll({
+            db.user.findOne({
                 where: { id: req.params.userId },
                 attributes: ['id', 'nickname', 'profile_img', 'status_msg', 'total_follow', 'total_follower'],
                 include: [{ model: db.post,
                     where: { user_id: req.params.userId },
-                    order:[['createdAt', 'DESC']] }],
-                    attributes: ['id', 'painting', 'createdAt']
+                    order: [['createdAt', 'DESC']],
+                    attributes: ['id', 'painting', 'createdAt'] }]
             }).then((data) => {
                 res.json({ data: data, message: "The User Info and Feeds by Date" });
             })
         } catch {
-            res.status(404).json({ message: "Could Not Bring the Posts" });
+            res.status(404).json({ message: "Could Not Bring the Info and Posts" });
         }
     },
 
@@ -59,8 +59,9 @@ module.exports = {
                     const id = el['dataValues'].user_id;
                     if (!followingIds.includes(id)) followingIds.push(id);
                 })
+                console.log(followingIds)
                 db.post.findAll({
-                    where: { id: followingIds },
+                    where: { user_id: followingIds },
                     attributes: ['id', 'painting', 'user_id', 'createdAt'],
                     order: [['createdAt', 'DESC']]
                 }).then((data) => {

@@ -7,6 +7,7 @@ const db = require('../models');
 // 클라이언트 token 확인하는 컨트롤러 필요할지도
 module.exports = {
     getFollower: (req, res, next) => {
+        // userId: feed user
         try {
             db.follow.findAll({
                 where: { user_id: req.params.userId }
@@ -29,6 +30,7 @@ module.exports = {
     },
 
     getFollowing: (req, res) => {
+        // userId: feed user
         try {
             db.follow.findAll({
                 where: { follower_id: req.params.userId }
@@ -38,7 +40,7 @@ module.exports = {
                     const id = el['dataValues'].user_id;
                     if (!followingIds.includes(id)) followingIds.push(id);
                 })
-                console.log(followingIds);
+                // console.log(followingIds);
                 db.user.findAll({
                     where: { id: followingIds },
                     attributes: ['id','nickname','profile_img']
@@ -49,14 +51,13 @@ module.exports = {
         } catch {
             res.status(404).json({ message: "Failed to Load Followings" });
         }
-
     },
 
-    followUser: (req, res) => {
+    followUser: async (req, res) => {
         const { userId, followerId } = req.body;
         // userId: 해당 요청으로 follower가 증가하는 사용자 id
         // followerId: follow를 요청한 사용자 id
-        const followinfo = db.follow.findOne({
+        const followinfo = await db.follow.findOne({
             where: { user_id: userId, follower_id: followerId }
         })
         if (followinfo) {
@@ -79,7 +80,7 @@ module.exports = {
 
     unfollowUser: (req, res) => {
         const { unfollowId, userId } = req.body;
-        // unfollowId: unfollow 되는 사용자 id : 파라미터의 :followId와 동일한 값
+        // unfollowId: unfollow 되는 사용자 id
         // userId: unfollow를 요청한 사용자 id
         const followinfo = db.follow.findOne({
             where: { user_id: userId, follower_id: unfollowId }

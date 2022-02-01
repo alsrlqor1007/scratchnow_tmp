@@ -12,20 +12,23 @@ module.exports = {
             db.user.findOne({
                 where: { id: userId },
                 attributes: ['nickname', 'profile_img']
-            }).then((commentWriter) => {
-                res.status(201).json({ data: {CommentInfo, commentWriter}, message: "Comment Created" });
+            }).then((CommentWriter) => {
+                res.status(201).json({ data: {CommentInfo, CommentWriter}, message: "Comment Created" });
             })
         } catch {
             res.status(500).json({ data: null, message: "Failed to create Comment" });
         }
     },
 
-    updateComment: async (req, res) => {
+    updateComment: (req, res) => {
         const { commentId, userid, postId, text } = req.body;
         try {
-            await db.comment.update(text, { where: { id: commentId } });
-            const updatedComment = await db.comment.findOne({ where: { id: id }});
-            res.status(201).json({ data: updatedComment, message: "Comment Updated" });
+            db.comment.update(req.body, { where: { id: commentId } });
+            db.comment.findOne(
+                { where: { id: commentId }}
+            ).then((updatedComment) => {
+                res.status(201).json({ data: updatedComment, message: "Comment Updated" });
+            })
         } catch {
             res.status(500).json({ data: null, message: "Failed to update Comment" });
         }

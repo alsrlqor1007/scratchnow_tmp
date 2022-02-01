@@ -10,12 +10,15 @@ module.exports = {
         try {
             db.post.findOne({
                 where: { id: req.params.postId },
-                include: [{ model: db.comment, include: [{ model: db.user, attributes: ['nickname'] }] }]
+                include: [{
+                    model: db.comment,
+                    attributes: ['id', 'user_id', 'text', 'updatedAt'],
+                    include: [{ model: db.user, attributes: ['nickname'] }] }]
             }).then((data) => {
                 res.json({ data: data, message: "The Post Detail" });
             });
         } catch {
-            res.status(404).json({ message: "Couldn't find the post'"});
+            res.status(404).json({ message: "Couldn't find the post"});
         }
     },
 
