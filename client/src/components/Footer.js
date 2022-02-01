@@ -147,7 +147,7 @@ const Footer = () => {
           </Item>
         </Wrapper>
       </Container>
-      <Copyright>© 2022 Crayondiary. All rights reserved.</Copyright>
+      <Copyright>© 2022 scratchNow. All rights reserved.</Copyright>
     </FooterWrapper>
   );
 };

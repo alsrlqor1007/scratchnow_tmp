@@ -224,9 +224,11 @@ const FollowingModal = ({ isOpen, close }) => {
     setIsModalOpen(false);
   };
 
-  const follower = () => {};
+  const follower = () => {
+  }
 
-  const following = () => {};
+  const following = () => {
+  };
 
   return (
     <>
@@ -239,8 +241,8 @@ const FollowingModal = ({ isOpen, close }) => {
             <NavContainer>
               <User src={icon} alt="" />
               <UserNickName>유저닉네임</UserNickName>
-              <LoginBtn onClick={follower}>팔로워</LoginBtn>
-              <LoginBtn onClick={following}>팔로잉</LoginBtn>
+              <LoginBtn onClick={follower()}>팔로워</LoginBtn>
+              <LoginBtn onClick={following()}>팔로잉</LoginBtn>
             </NavContainer>
             <SearchBox>
               <SearchInput />
