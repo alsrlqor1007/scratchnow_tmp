@@ -32,6 +32,7 @@ module.exports = {
     },
 
     deleteComment: async (req, res) => {
+        const { commentId } = req.body;
         await db.comment.destroy({
             where: { id: req.body.commentId }
         })

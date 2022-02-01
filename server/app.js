@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 // Router 연결
 const SignRouter = require('./routes/SignRouter');
@@ -21,7 +21,7 @@ const LikesRouter = require('./routes/LikesRouter');
 // Middleware
 app.use(
     cors({
-      origin: '*',
+      origin: ['http://localhost:3000', 'http://localhost:80'],
       credentials: true,
       methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     })

@@ -1,6 +1,5 @@
 require('dotenv').config();
 const db = require('../models');
-// options = { multi: true };
 
 // token function
 // const { generateAccessToken, sendAccessToken, isAuthorized } = require('./signFunctions');
@@ -17,10 +16,10 @@ module.exports = {
                     attributes: ['id', 'nickname', 'profile_img', 'status_msg', 'total_follow', 'total_follower']
                 }]
             }).then((data) => {
-                res.json({ data: data, message: "My Userinfo" });
+                res.json({ data: data, message: "Mypage Feed" });
             })
         } catch {
-            res.status(404).json({ message: "Failed to Bring UserInfo" });
+            res.json({ message: "Failed to Bring Userinfo" });
         }
     },
 
@@ -37,7 +36,7 @@ module.exports = {
                 })
             })
         } catch {
-            res.status(406).json({ message: "Failed to Update UserInfo" });
+            res.json({ message: "Failed to Update UserInfo" });
         }
     },
 
@@ -47,10 +46,15 @@ module.exports = {
             db.user.update(
                 profile_img, { where: { id: userId } }
             ).then((data) => {
-                res.json({ data: data, message: "Updated the Profile Img" });
+                db.user.findOne({
+                    where: { id: userId },
+                    attributes: ['id', 'profile_img']
+                }).then((data) => {
+                    res.json({ data: data, message: "Updated the Profile Img" });
+                })
             })
         } catch {
-            res.status(406).json({ message: "Failed to Update Profile Img" });
+            res.json({ message: "Failed to Update Profile Img" });
         }
     },
 
@@ -59,6 +63,6 @@ module.exports = {
         await db.user.destroy({
             where: { id: userId }
         })
-        res.json({ message: "UserInfo Deleted" });
+        res.json({ message: "Userinfo Deleted" });
     }
 };

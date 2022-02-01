@@ -32,7 +32,7 @@ module.exports = {
         }
     },
 
-    getUserFeeds: (req, res) => { // 테스트 요망
+    getUserFeeds: (req, res) => {
         try {
             db.user.findAll({
                 where: { id: req.params.userId },
