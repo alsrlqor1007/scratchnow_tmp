@@ -5,6 +5,8 @@ files:
     destination: /home/ubuntu/scratchNow
 
 hooks:
+  BeforeInstall:
+    - location: scripts/beforeInstall.bash
   ApplicationStop:
     - location: scripts/stop.sh
       runas: root
