@@ -13,7 +13,7 @@ module.exports = {
                 include: [{
                     model: db.comment,
                     attributes: ['id', 'user_id', 'text', 'updatedAt'],
-                    include: [{ model: db.user, attributes: ['nickname'] }] }]
+                    include: [{ model: db.user, attributes: ['nickname', 'profile_img'] }] }]
             }).then((data) => {
                 res.json({ data: data, message: "The Post Detail" });
             });
