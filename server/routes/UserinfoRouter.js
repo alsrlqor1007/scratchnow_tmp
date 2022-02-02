@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const app = require('../app');
+// const app = express();
 const userinfoController = require('../controllers/UserinfoController');
 
 // multer setting
@@ -26,11 +26,13 @@ const upload = multer({
     })
 });
 
-app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
+// app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
 
 router.get('/:userId', userinfoController.getUserinfoById);
-router.patch('/', userinfoController.changeUserinfo);
-router.patch('/imgchange', upload.single('profile_img'), userinfoController.changeProfileImg);
+router.patch('/nick', userinfoController.changeNickname);
+router.patch('/msg', userinfoController.changeStatusMsg);
+router.patch('/img', upload.single('profile_img'), userinfoController.changeProfileImg);
+router.patch('password', userinfoController.changePassword);
 router.delete('/', userinfoController.deleteUserinfo);
 
 module.exports = router;

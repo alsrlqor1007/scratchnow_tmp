@@ -38,11 +38,13 @@ module.exports = {
                 where: { id: req.params.userId },
                 attributes: ['id', 'nickname', 'profile_img', 'status_msg', 'total_follow', 'total_follower'],
                 include: [{ model: db.post,
-                    where: { user_id: req.params.userId },
                     order: [['createdAt', 'DESC']],
                     attributes: ['id', 'painting', 'createdAt'] }]
-            }).then((data) => {
-                res.json({ data: data, message: "The User Info and Feeds by Date" });
+            }).then( async (userdata) => {
+                const postAmount = await db.post.count({
+                    where: { user_id: req.params.userId }
+                })
+                res.json({ data: { userdata, postAmount }, message: "The User Info and Feeds by Date" });
             })
         } catch {
             res.status(404).json({ message: "Could Not Bring the Info and Posts" });
