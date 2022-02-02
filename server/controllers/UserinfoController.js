@@ -41,7 +41,9 @@ module.exports = {
     },
 
     changeProfileImg: (req, res) => {
-        const { userId, profile_img } = req.body;
+        const { userId } = req.body;
+        const profile_img = req.file.path;
+        
         try {
             db.user.update(
                 profile_img, { where: { id: userId } }
