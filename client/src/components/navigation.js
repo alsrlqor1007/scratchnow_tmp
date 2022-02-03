@@ -54,10 +54,10 @@ function Navigation () {
     <>
       <NavContainer>
         <NavBox>
-          <HomeButton/>
-          <ButtonBox onClick={() => navigate('/')}>
-            <NavButton>로그인</NavButton>
-            <NavButton>회원 가입</NavButton>
+          <HomeButton onClick={() => navigate('/')}/>
+          <ButtonBox>
+            <NavButton onClick={() => navigate('/signIn')}>로그인</NavButton>
+            <NavButton onClick={() => navigate('/signUp')}>회원 가입</NavButton>
           </ButtonBox>
         </NavBox>
       </NavContainer>
