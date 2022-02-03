@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -50,14 +51,36 @@ const NavButton = styled.button`
 
 function Navigation () {
   const navigate = useNavigate();
+  const loginState = localStorage.getItem('isLogin');
+  const logOut = () => {
+    axios({
+      url: 'http://ec2-52-78-171-4.ap-northeast-2.compute.amazonaws.com/api/sign/logout', // samesite error
+      method: 'post',
+      withCredentials: true,
+    })
+    .then((res) => {
+      if(res.status === 200){
+        console.log(res);
+        localStorage.removeItem('isLogin');
+        navigate('/');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
   return (
     <>
       <NavContainer>
         <NavBox>
           <HomeButton onClick={() => navigate('/')}/>
           <ButtonBox>
-            <NavButton onClick={() => navigate('/signIn')}>로그인</NavButton>
-            <NavButton onClick={() => navigate('/signUp')}>회원 가입</NavButton>
+            {loginState ? 
+              <NavButton>마이페이지</NavButton> // 마이페이지 연결.
+              : <NavButton onClick={() => navigate('/signIn')}>로그인</NavButton>}
+            {loginState ? 
+              <NavButton onClick={logOut}>로그 아웃</NavButton> 
+              : <NavButton onClick={() => navigate('/signUp')}>회원 가입</NavButton>}
           </ButtonBox>
         </NavBox>
       </NavContainer>
