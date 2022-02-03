@@ -33,13 +33,16 @@ module.exports = {
         const emailinfo = await db.user.findOne({
             where: { email: email }
         })
-        if (emailinfo) {
+        const emailExistence = emailinfo !== null ? emailinfo.dataValues : false;
+        if (emailExistence) {
             res.json({ data: email, message: "Email Exists" });
         } else {
-            const nicknameinfo = await db.user.findOne({
+            const nickinfo = await db.user.findOne({
                 where: { nickname: nickname }
-            });
-            if (nicknameinfo) {
+            })
+            const nickExistence = nickinfo !== null ? nickinfo.dataValues : false;
+        
+            if (nickExistence) {
                 res.json({ data: nickname, message: "Nickname Exists" });
             } else {
                 db.user.create({ email, nickname, password })

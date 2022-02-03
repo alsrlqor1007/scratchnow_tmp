@@ -21,7 +21,12 @@ const LikesRouter = require('./routes/LikesRouter');
 // Middleware
 app.use(
     cors({
-      origin: ['http://localhost:3000', 'http://localhost:80'],
+      origin: '*',
+      // [
+      //   'http://localhost:3000',
+      //   'http://localhost:80',
+      //   'http://ec2-52-78-171-4.ap-northeast-2.compute.amazonaws.com'
+      // ],
       credentials: true,
       methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     })
