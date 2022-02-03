@@ -7,13 +7,19 @@ const db = require('../models');
 // 클라이언트 token 확인하는 컨트롤러 필요할지도
 module.exports = {
     getUserinfoById: (req, res) => {
+        const pageNum = req.query.page;
+        let offset = 0;
+        if (pageNum > 1) offset = 20 * (pageNum - 1);
+
         try {
             db.user.findOne({
                 where: { id: req.params.userId },
                 attributes: ['id', 'nickname', 'profile_img', 'status_msg', 'total_follow', 'total_follower'],
                 include: [{ model: db.post,
                     order: [['createdAt', 'DESC']],
-                    attributes: ['id', 'painting', 'createdAt'] }]
+                    attributes: ['id', 'painting', 'createdAt'],
+                    offset: offset,
+                    limit: 20 }]
             }).then( async (userdata) => {
                 const postAmount = await db.post.count({
                     where: { user_id: req.params.userId }
