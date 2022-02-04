@@ -27,7 +27,7 @@ module.exports = {
         // const { userId, painting, text } = req.file;
         console.log(req.body);
         try {
-            await db.post.create({ painting, text, user_id: Num(userId) })
+            await db.post.create({ painting, text, user_id: Number(userId) })
             .then((data) => {
                 res.json({ data: data, message: "Created Successfully" });
             });
