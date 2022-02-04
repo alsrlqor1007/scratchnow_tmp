@@ -58,6 +58,9 @@ const ErrorMessage = styled.div`
   ${props => props.login &&`
     margin 5px 0px;
   `}
+  ${props => props.signUp &&`
+    margin: 5px 0px 20px 0px;
+  `}
 `
 const Button = styled.button`
   width: 300px;
@@ -87,7 +90,7 @@ const DividedBox = styled.div`
   justify-content: space-between;
   align-items: center;
   ${props => props.signUp &&`
-    margin: 10px; 0px;
+    margin: 10px 0px 25px 0px;
   `}
 `
 const SplitLine = styled.hr`
@@ -274,13 +277,13 @@ export function SignUp () {
               <SplitLine/>
             </DividedBox>
             <InputBox placeholder="이메일" onChange={checkEmail}/>
-            <ErrorMessage>{emailState ? '' : '이메일 주소가 유효하지 않습니다.'}</ErrorMessage>
+            <ErrorMessage signUp>{emailState ? '' : '이메일 주소가 유효하지 않습니다.'}</ErrorMessage>
             <InputBox placeholder="닉네임" onChange={checkNickName}/>
-            <ErrorMessage>{nickNameState ? '' : '닉네임은 10자 이내로 입력해주세요.'}</ErrorMessage>
+            <ErrorMessage signUp>{nickNameState ? '' : '닉네임은 10자 이내로 입력해주세요.'}</ErrorMessage>
             <InputBox placeholder="비밀 번호" onChange={checkPassword}/>
-            <ErrorMessage>{passwordState ? '' : '숫자, 대문자, 특수 문자를 포함하여 8자 이상이어야 합니다.'}</ErrorMessage>
+            <ErrorMessage signUp>{passwordState ? '' : '숫자, 대문자, 특수 문자를 포함하여 8자 이상이어야 합니다.'}</ErrorMessage>
             <InputBox placeholder="비밀 번호 확인" onChange={checkPasswordIsSame}/>
-            <ErrorMessage>{samePasswordState ? '' : '비밀 번호가 일치하지 않습니다.'}</ErrorMessage>
+            <ErrorMessage signUp>{samePasswordState ? '' : '비밀 번호가 일치하지 않습니다.'}</ErrorMessage>
             <Button signUp onClick={signUp}>회원 가입</Button>
             <BottomLink>회원이신가요 ? 
                 <Bold onClick={() => navigate('/signIn')}>로그인 하기</Bold>
