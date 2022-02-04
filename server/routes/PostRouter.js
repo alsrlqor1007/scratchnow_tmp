@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const fs = require('fs');
 const path = require('path');
 const postController = require('../controllers/PostController');
 
@@ -16,7 +17,7 @@ const upload = multer({
     storage: multer.diskStorage({
         // 저장 공간
         destination: (req, file, done) => {
-            done(null, '/uploads/paintings/');
+            done(null, '../uploads/paintings/');
         },
         // 저장 이름
         filename: (req, file, done) => {
