@@ -18,7 +18,7 @@ const upload = multer({
     storage: multer.diskStorage({
         // 저장 공간
         destination: (req, file, done) => {
-            done(null, 'uploads/');
+            done(null, __dirname + 'uploads/');
         },
         // 저장 이름
         filename: (req, file, done) => {
