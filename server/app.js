@@ -37,6 +37,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(form_data.array());
 
 app.use('/api/sign', SignRouter);
 app.use('/api/post', PostRouter);
