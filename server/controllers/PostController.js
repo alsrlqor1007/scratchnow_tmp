@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fs = require('fs');
 const db = require('../models');
 
 // token function
@@ -40,9 +41,9 @@ module.exports = {
         // const { userId, text, painting } = req.file.path;
         console.log(req.body);
         
-        const paintUrl = `../uploads/paintings/${req.file.filename}`;
+        // const paintUrl = `/uploads/paintings/${req.file.filename}`;
         try {
-            await db.post.create({ painting: paintUrl, text: req.body.text, user_id: Number(req.body.userId) })
+            await db.post.create({ painting: painting, text: req.body.text, user_id: Number(req.body.userId) })
             .then((data) => {
                 res.json({ data: data, message: "Created Successfully" });
             });
