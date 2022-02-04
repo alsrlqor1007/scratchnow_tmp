@@ -75,7 +75,7 @@ const WeatherContainer = styled.div`
   }
 `;
 
-// 글 작성 컨테이너
+// 글 작성 컨테이너 ---------------------------------------------------------------
 const LetterContainer = styled.div`
   /* width: 290px;
   height: 550px; */
