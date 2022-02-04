@@ -23,8 +23,8 @@ module.exports = {
     },
 
     createPost: async (req, res) => {
-        const { userId, text } = req.body;
-        const {userId, painting, text } = req.file;
+        const { userId, painting, text } = req.body.data.formdata;
+        // const { userId, painting, text } = req.file;
 
         try {
             await db.post.create({ painting, text, user_id: userId })
