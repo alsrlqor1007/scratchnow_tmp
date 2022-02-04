@@ -16,7 +16,7 @@ module.exports = {
                 res.status(201).json({ data: {CommentInfo, CommentWriter}, message: "Comment Created" });
             })
         } catch {
-            res.status(500).json({ data: null, message: "Failed to create Comment" });
+            res.json({ data: null, message: "Failed to create Comment" });
         }
     },
 
@@ -30,7 +30,7 @@ module.exports = {
                 res.status(201).json({ data: updatedComment, message: "Comment Updated" });
             })
         } catch {
-            res.status(500).json({ data: null, message: "Failed to update Comment" });
+            res.json({ data: null, message: "Failed to update Comment" });
         }
     },
 
