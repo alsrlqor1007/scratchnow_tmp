@@ -23,16 +23,16 @@ module.exports = {
     },
 
     createPost: async (req, res) => {
-        const { userId, text, painting } = req.body;
+        // const { userId, text, painting } = req.body;
         // const { userId, text, painting } = req.file.path;
         console.log(req);
         console.log('req 끝');
         console.log(req.body);
         console.log('req.body 끝');
         console.log(req.file);
-        const paint = req.file.filename;
+        const paintUrl = `../uploads/paintings/${req.file.filename}`;
         try {
-            await db.post.create({ painting: paint, text, user_id: Number(userId) })
+            await db.post.create({ painting: paintUrl, text: req.body.text, user_id: Number(req.body.userId) })
             .then((data) => {
                 res.json({ data: data, message: "Created Successfully" });
             });
