@@ -9,7 +9,7 @@ const upload = multer({
     storage: multer.diskStorage({
         // 저장 공간
         destination: (req, file, done) => {
-            done(null, 'uploads/');
+            done(null, 'uploads/paintings');
         },
         // 저장 이름
         filename: (req, file, done) => {
@@ -26,7 +26,7 @@ const upload = multer({
 });
 
 router.get('/:postId', postController.getPostById);
-router.post('/', postController.createPost);
+router.post('/', upload.single('painting'), postController.createPost);
 router.patch('/', postController.updatePostById);
 router.delete('/', postController.deletePost);
 
