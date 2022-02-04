@@ -8,7 +8,8 @@ const postController = require('../controllers/PostController');
 // multer setting
 
 try {
-    fs.readdirSync('/uploads/paintings/')
+    fs.readdirSync('uploads/');
+    console.log('폴더가 있습니다.')
 } catch {
     console.error('폴더가 없습니다.')
 }
