@@ -3,6 +3,19 @@ const db = require('../models');
 
 // token function
 
+const dataURLtoFile = (dataurl, fileName) => {
+        let arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), 
+            n = bstr.length, 
+            u8arr = new Uint8Array(n);
+            
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        };
+        
+        return new File([u8arr], fileName, {type:mime});
+    }
 
 // 클라이언트 token 확인하는 컨트롤러 필요할지도
 module.exports = {
@@ -23,13 +36,10 @@ module.exports = {
     },
 
     createPost: async (req, res) => {
-        // const { userId, text, painting } = req.body;
+        const { userId, painting, text } = req.body;
         // const { userId, text, painting } = req.file.path;
-        console.log(req);
-        console.log('req 끝');
         console.log(req.body);
-        console.log('req.body 끝');
-        console.log(req.file);
+        
         const paintUrl = `../uploads/paintings/${req.file.filename}`;
         try {
             await db.post.create({ painting: paintUrl, text: req.body.text, user_id: Number(req.body.userId) })
