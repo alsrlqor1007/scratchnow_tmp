@@ -32,13 +32,14 @@ module.exports = {
                 res.json({ data: data, message: "The Post Detail" });
             });
         } catch {
-            res.status(404).json({ message: "Couldn't find the post"});
+            res.status(404).json({ message: "Couldn't find the post" });
         }
     },
 
     createPost: async (req, res) => {
-        const { userId, painting, text } = req.body;
-        // const { userId, text, painting } = req.file.path;
+        const { userId, text } = req.body;
+        console.log(req.file);
+        // const { painting } = req.file.path;
         console.log(req.body);
         
         // const paintUrl = `../uploads/paintings/${req.file.filename}`;
