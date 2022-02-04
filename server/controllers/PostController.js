@@ -24,9 +24,10 @@ module.exports = {
 
     createPost: async (req, res) => {
         // const { userId, text, painting } = req.body;
-        const { userId, text, painting } = req.file;
-        console.log(req.file);
+        const { userId, text, painting } = req.file.path;
+        console.log(req);
         try {
+            console.log(req.file);
             await db.post.create({ painting, text, user_id: Number(userId) })
             .then((data) => {
                 res.json({ data: data, message: "Created Successfully" });
