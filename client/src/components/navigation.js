@@ -76,7 +76,7 @@ function Navigation () {
           <HomeButton onClick={() => navigate('/')}/>
           <ButtonBox>
             {loginState ? 
-              <NavButton>마이페이지</NavButton> // 마이페이지 연결.
+              <NavButton onClick={() => navigate('/myPage')}>마이페이지</NavButton>
               : <NavButton onClick={() => navigate('/signIn')}>로그인</NavButton>}
             {loginState ? 
               <NavButton onClick={logOut}>로그 아웃</NavButton> 

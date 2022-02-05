@@ -58,6 +58,7 @@ const Canvas = styled.canvas`
   left: 0;
   width: 100%;
   height: calc(100% - 25vh);
+  border-radius: 5px;
   z-index: ${props => props.back ? 1 : 2};
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `100%`};
@@ -113,29 +114,36 @@ const ControlTowerContainer = styled.div`
   }
 `
 const ButtonContainer = styled.div`
-  display: inline; 
+  display: inline;
+  text-align: center; 
   width: 100%;
-  height: 60px; // 버튼 개수 늘어나면 높이 변해야 함.
+  height: 50px; // 버튼 개수 늘어나면 높이 변해야 함.
+  margin-top: 10px;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     display: inline; 
   }
   @media only screen and (min-width: ${BREAK_POINT_PC}px) {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around; 
+    justify-content: center; 
   }
 `
 const Button = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  outline: none;
+  border: none;
   cursor: pointer;
+  border-radius: 10px;
+  margin: 0px 5px;
+  box-shadow: rgba(50, 50, 93, 0.15) 0px 2px 4px -1px;
   ${props => props.reset &&`
     background: url('http://localhost:5500/client/public/images/newCanvas.png') no-repeat center;
-    background-size: 25px;
+    background-size: 15px;
   `}
   ${props => props.rainbow &&`
     background: url('http://localhost:5500/client/public/images/scratchNowLogo.png') no-repeat center;
-    background-size: 40px;
+    background-size: 30px;
   `}
   background-color: white;
 `
@@ -146,6 +154,7 @@ const SaveButton = styled.button`
   outline: none;
   cursor: pointer;
   border-radius: 5px;
+  margin: 15px 10px 15px 10px;
   color: white;
   background-color: #F9B8C6;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
@@ -153,16 +162,19 @@ const SaveButton = styled.button`
     height: 90%; 
   }
   @media only screen and (min-width: ${BREAK_POINT_PC}px) {
-    width: 200px;
+    width: 280px;
     height: 35px;
-    margin: 20px 0px;
   }
 `
 const Range = styled.input`
-  // 추후 스타일 변경
+  width: 90%;
+  height: 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  // 추후 디자인 변경
 `
 const TextArea = styled.textarea`
-  border-radius: 30px;
+  border-radius: 15px;
   border: none;
   font-family: "Gaegu";
   font-size: 30px;
@@ -171,23 +183,24 @@ const TextArea = styled.textarea`
   padding: 10px 15px 10px;
   outline: none;
   resize: none;
+  overflow: hidden;
   background-attachment: local;
   background-image: linear-gradient(to right, white 10px, transparent 10px),
     linear-gradient(to left, white 10px, transparent 10px),
     repeating-linear-gradient(
       white,
-      white 45px,
-      #ccc 30px,
-      white 46px
+      white 36px,
+      #ccc 21px,
+      white 37px
     );
-  line-height: 46px;
+  line-height: 36.5px;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px){
     width: 75%;
-    height: 83%;
+    height: 80%;
   }
   @media only screen and (min-width: ${BREAK_POINT_PC}px) {
     width: 250px;
-    height: 530px;
+    height: 500px;
   }
 `
 
@@ -237,7 +250,7 @@ function Painting () {
       }
       const file = new Blob([new Uint8Array(array)], { type: 'image/jpg' });
       const fileName = `canvas_img_${new Date().getMilliseconds()}.jpg`;
-      formData.append('painting', file); 
+      formData.append('painting', file, fileName); 
 
       // isNotBlob
       //formData.append('painting', rawData);
@@ -246,7 +259,7 @@ function Painting () {
         url: 'http://ec2-52-78-171-4.ap-northeast-2.compute.amazonaws.com/api/post',
         method: 'post',
         header: {
-          'Process-Data': false,
+          'processData': false,
           'Content-Type': 'multipart/form-data',
         },
         data: formData,
@@ -351,7 +364,7 @@ function Painting () {
                 onChange={handleEraserSize}
               />
             </ControlTowerContainer>
-            <TextArea onChange={(event) => setText(event.target.value)}/>
+            <TextArea onChange={(event) => setText(event.target.value)} maxLength="200"/>
             <SaveButton onClick={postPainting}>저장 하기</SaveButton>
           </CanvasSide>
         </CanvasContainer>
