@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     nickname: DataTypes.STRING,
     password: DataTypes.STRING,
-    profile_img: DataTypes.BLOB,
+    profile_img: DataTypes.STRING,
     status_msg: DataTypes.STRING,
     total_follow: { type: DataTypes.INTEGER, defaultValue: 0 },
     total_follower: { type: DataTypes.INTEGER, defaultValue: 0 }

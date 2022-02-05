@@ -8,7 +8,7 @@ const postController = require('../controllers/PostController');
 // multer setting
 
 try {
-    fs.readdirSync('uploads/');
+    fs.readdirSync('../uploads/');
     console.log('폴더가 있습니다.')
 } catch {
     console.error('폴더가 없습니다.')
@@ -18,7 +18,7 @@ const upload = multer({
     storage: multer.diskStorage({
         // 저장 공간
         destination: (req, file, done) => {
-            done(null, __basedir + 'uploads/');
+            done(null, '../uploads/');
         },
         // 저장 이름
         filename: (req, file, done) => {
