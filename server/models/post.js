@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   post.init({
-    painting: DataTypes.BLOB,
+    painting: DataTypes.STRING,
     text: DataTypes.STRING,
     user_id: DataTypes.INTEGER,
     total_likes: { type: DataTypes.INTEGER, defaultValue: 0 }

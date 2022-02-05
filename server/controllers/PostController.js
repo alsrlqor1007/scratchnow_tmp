@@ -39,12 +39,11 @@ module.exports = {
     createPost: async (req, res) => {
         const { userId, text } = req.body;
         console.log(req.file);
-        // const { painting } = req.file.path;
         console.log(req.body);
         
-        // const paintUrl = `../uploads/paintings/${req.file.filename}`;
+        const paintUrl = req.file.path;
         try {
-            await db.post.create({ painting: painting, text: req.body.text, user_id: Number(req.body.userId) })
+            await db.post.create({ painting: paintUrl, text: req.body.text, user_id: Number(req.body.userId) })
             .then((data) => {
                 res.json({ data: data, message: "Created Successfully" });
             });
