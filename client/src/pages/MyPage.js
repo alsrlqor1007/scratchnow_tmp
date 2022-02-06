@@ -8,7 +8,7 @@ export const Contentbox = styled.div`
   width: 1320px;
   height: 100%;
   background: #fff8d6;
-  padding: 20px 10px 100px 10px; //글자위치
+  padding: 20px 10px 100px 10px; // 글자위치
   border-radius: 30px;
   align-items: stretch;
   margin: auto;

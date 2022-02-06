@@ -150,7 +150,7 @@ export function SignIn () {
           email,
           password,
         },
-        withCredentials: true,
+        // withCredentials: true,
       })
       .then((res) => {
         if(res.status === 200){
