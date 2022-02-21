@@ -3,9 +3,7 @@
 ##### Mini Project
 
 ⏩ Project Link  
-⏩ Project Wiki
 
-<img width="500" src="https://cdn.discordapp.com/attachments/931453569645813823/933901074522325022/My_project.png">
 
 ## About
 
